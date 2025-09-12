@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="ecom.client/ecom.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="ecom.Server/ecom.Server.csproj" />
+</Solution>
