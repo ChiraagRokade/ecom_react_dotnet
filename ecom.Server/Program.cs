@@ -4,7 +4,6 @@ using ecom.Server.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
@@ -32,6 +31,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
             errorNumbersToAdd: null);
     }));
 
+// Add controllers
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 app.UseDefaultFiles();
@@ -45,6 +47,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+// Enable routing and endpoints
+app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();

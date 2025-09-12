@@ -50,6 +50,12 @@ export default defineConfig({
             '^/weatherforecast': {
                 target,
                 secure: false
+            },
+            // Add proxy configuration for auth endpoints
+            '^/auth': {
+                target,
+                secure: false,
+                changeOrigin: true
             }
         },
         port: parseInt(env.DEV_SERVER_PORT || '62792'),
