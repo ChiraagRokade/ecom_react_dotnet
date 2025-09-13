@@ -1,26 +1,28 @@
 using Microsoft.AspNetCore.Mvc;
+using ecom.Server.Models;
+using ecom.Server.ViewModels;
 
-namespace ecom.Server.Controllers
+namespace ecom.Server.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class WeatherForecastController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    [HttpGet]
+    public IEnumerable<WeatherForecastViewModel> Get()
     {
-        private static readonly string[] Summaries =
-        [
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        ];
-
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        // Example: Replace with your actual data source
+        var forecasts = new List<WeatherForecast>
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
-        }
+            new WeatherForecast { Date = DateOnly.FromDateTime(DateTime.Now), TemperatureC = 25, Summary = "Sunny" }
+        };
+
+        return forecasts.Select(f => new WeatherForecastViewModel
+        {
+            Date = f.Date,
+            TemperatureC = f.TemperatureC,
+            TemperatureF = f.TemperatureF,
+            Summary = f.Summary
+        });
     }
 }
